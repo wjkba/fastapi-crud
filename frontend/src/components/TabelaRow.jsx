@@ -11,8 +11,11 @@ export default function TabelaRow({ id, name, surname }) {
     setIsEditing(true);
   };
   const handleCloseEdit = () => {
-    setIsEditing(false);
-    handlePutRequest();
+    const data = { name: editName, surname: editSurname };
+    if (data.name.length > 0 && data.surname.length > 0) {
+      setIsEditing(false);
+      handlePutRequest(data);
+    }
   };
   const handleDelete = () => {
     if (!displayConfirm) {
@@ -22,8 +25,7 @@ export default function TabelaRow({ id, name, surname }) {
     }
   };
 
-  const handlePutRequest = async () => {
-    const data = { name: editName, surname: editSurname };
+  const handlePutRequest = async (data) => {
     try {
       const response = await axios.put(
         `http://localhost:8000/authors/${id}`,

@@ -17,16 +17,20 @@ export default function CreateForm() {
   };
   const handlePostRequest = async () => {
     const data = { name: name, surname: surname };
-    try {
-      const response = await axios.post("http://localhost:8000/authors", data);
-      if (response.status == 200) {
-        window.location.reload();
+    if (data.name.length > 0 && data.surname.length > 0) {
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/authors",
+          data
+        );
+        if (response.status == 200) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
-
   return (
     <div>
       <h1 className="text-xl mb-4 sm:text-2xl">Add Author</h1>
