@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 export default function TabelaRow({ id, name, surname }) {
   const [editName, setEditName] = useState(name);
@@ -64,7 +65,7 @@ export default function TabelaRow({ id, name, surname }) {
         <div>{editName}</div>
       ) : (
         <input
-          className="bg-yellow-100 outline-none"
+          className="border-b-2 border-black bg-yellow-100 outline-none"
           value={editName}
           onChange={(e) => handleNameChange(e)}
         />
@@ -73,28 +74,40 @@ export default function TabelaRow({ id, name, surname }) {
         <div>{editSurname}</div>
       ) : (
         <input
-          className="bg-yellow-100 outline-none"
+          className="border-b-2 border-black bg-yellow-100 outline-none"
           value={editSurname}
           onChange={(e) => handleSurnameChange(e)}
         />
       )}
-      <div className="flex">
+      <div className="flex gap-1 justify-between pb-1">
         {!isEditing ? (
-          <button onClick={handleEdit} className="bg-yellow-200 p-1 w-full">
-            Edit
+          <button
+            onClick={handleEdit}
+            className="max-w-[4rem] w-full px-1 py-0.5 bg-yellow-400 hover:bg-yellow-500 font-semibold text-white drop-shadow rounded"
+          >
+            <p>EDIT</p>
           </button>
         ) : (
-          <button onClick={handleCloseEdit} className="bg-green-200 p-1 w-full">
-            OK
+          <button
+            onClick={handleCloseEdit}
+            className=" bg-[#fca130] hover:bg-[#db8c2a] max-w-[4rem] w-full px-1 py-0.5 font-semibold text-white drop-shadow rounded"
+          >
+            PUT
           </button>
         )}
         <button
           onClick={handleDelete}
-          className={`${displayConfirm && "bg-red-400"} bg-red-200 p-1 w-full`}
+          className={`${displayConfirm && "bg-[#3d3d3d] hover:bg-black"} w-full px-1 py-0.5 bg-[#f93e3e] hover:bg-[#ca3434] font-semibold text-white drop-shadow rounded`}
         >
-          {!displayConfirm ? "Delete" : "Confirm"}
+          {!displayConfirm ? "DELETE" : "CONFIRM"}
         </button>
       </div>
     </>
   );
 }
+
+TabelaRow.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
+};

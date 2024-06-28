@@ -2,14 +2,6 @@ import axios from "axios";
 import TabelaRow from "./TabelaRow";
 import { useEffect, useState } from "react";
 
-let data1 = [
-  { name: "William ", surname: "Shakespeare" },
-  { name: "Jane ", surname: "Austen" },
-  { name: "Charles ", surname: "Dickens" },
-  { name: "Mark ", surname: "Twain" },
-  { name: "Leo ", surname: "Tolstoy" },
-];
-
 export default function Tabela() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -26,17 +18,22 @@ export default function Tabela() {
   };
 
   return (
-    <div className="max-w-[30rem] bg-white">
+    <div className=" bg-white ">
+      <h1 className="text-xl mb-4 sm:text-2xl">Authors</h1>
       <div className="grid grid-cols-3">
-        <div className="bg-blue-200">Imie</div>
+        {/* <div className="bg-blue-200">Imie</div>
         <div className="bg-blue-200">Naziwsko</div>
-        <div className="bg-blue-200">Akcje</div>
+        <div className="bg-blue-200">Akcje</div> */}
       </div>
       {data.map((item, index) => (
-        <div key={index} className="grid grid-cols-3">
+        <div
+          key={index}
+          className={`grid grid-cols-3 min-h-[2rem] ${index % 2 === 0 ? "bg-white" : "bg-gray-100"}`}
+        >
           <TabelaRow id={item.id} name={item.name} surname={item.surname} />
         </div>
       ))}
     </div>
   );
 }
+

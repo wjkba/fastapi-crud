@@ -15,12 +15,12 @@ export default function CreateForm() {
   const handleAddAuthor = () => {
     handlePostRequest();
   };
-  const handlePostRequest = async (e) => {
+  const handlePostRequest = async () => {
     const data = { name: name, surname: surname };
     try {
       const response = await axios.post("http://localhost:8000/authors", data);
-      if(response.status == 200){
-        window.location.reload()
+      if (response.status == 200) {
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -28,38 +28,39 @@ export default function CreateForm() {
   };
 
   return (
-    <div className="bg-red-100 p-2">
+    <div>
+      <h1 className="text-xl mb-4 sm:text-2xl">Add Author</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
         className="flex flex-col gap-2 bg-white"
       >
-        <div>
+        <div className="flex flex-col">
           <label>Name: </label>
           <input
             value={name}
             onChange={(e) => handleNameChange(e)}
             type="text"
-            className="bg-gray-100 border-black border-1"
+            className="p-1 bg-gray-100 border-black border-1 outline-none"
           />
         </div>
-        <div>
+        <div className="flex flex-col">
           <label>Surname: </label>
           <input
             value={surname}
             onChange={(e) => handleSurnameChange(e)}
             type="text"
-            className="bg-gray-100 border-black border-1"
+            className="p-1 bg-gray-100 border-black border-1 outline-none"
           />
         </div>
         <div>
           <button
             onClick={handleAddAuthor}
             type="button"
-            className="px-2 bg-green-200"
+            className="w-full font-semibold px-5 py-0.5 bg-[#49cc90] hover:bg-[#42b883] text-white drop-shadow rounded"
           >
-            Add Author
+            POST
           </button>
         </div>
       </form>
